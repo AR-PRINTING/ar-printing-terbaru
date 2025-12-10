@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AR PRINTING — Premium</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- Swiper (slider) CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+
+<style>
+  :root{
+    --bg:#f4f4f4;
+    --card:#fff;
+    --text:#111;
+    --muted:#6b6b6b;
+    --accent:#b32929;
+    --accent-2:#ffcc00;
+    --glass: rgba(255,255,255,0.06);
+    --max-w:1200px;
+  }
+  [data-theme="dark"]{
+    --bg:#0f0f11;
+    --card:#111214;
+    --text:#eaeaea;
+    --muted:#bdbdbd;
+    --glass: rgba(255,255,255,0.03);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%; margin:0; font-family:"Poppins",sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none}
+
+  /* NAV */
+  .nav {
+    position:fixed; left:0; right:0; top:0; z-index:9999;
+    display:flex; align-items:center; gap:20px; padding:14px 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.32), rgba(255,255,255,0.04));
+    backdrop-filter: blur(6px);
+    transition: all .28s ease;
+  }
+  .nav.scrolled{ background: rgba(255, 255, 255, 0.86); }
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{width:44px;height:44px;border-radius:8px;object-fit:cover;box-shadow:0 8px 26px rgba(0,0,0,0.12)}
+  .brand h1{font-size:18px;margin:0;font-weight:700}
+  .links{margin-left:auto;display:flex;gap:18px;align-items:center}
+  .links a{font-weight:600;padding:6px 8px;border-radius:8px; color:var(--text); transition:.22s}
+  .links a:hover{color:var(--accent); transform:translateY(-3px)}
+  .actions{display:flex; gap:12px; align-items:center; margin-left:12px}
+  .btn{background:var(--accent); color:#fff; padding:8px 12px;border-radius:10px;font-weight:700; box-shadow:0 10px 26px rgba(179,41,41,0.12); cursor:pointer}
+  .icon-btn{background:transparent;border:1px solid rgba(0,0,0,0.06); padding:8px; border-radius:8px; cursor:pointer}
+
+  /* mobile */
+  .hamburger{display:none; width:42px; height:36px; align-items:center; justify-content:center; cursor:pointer; background:rgba(0,0,0,0.06); border-radius:8px}
+  @media (max-width:900px){ .links{display:none} .hamburger{display:flex} .actions{margin-left:8px} }
+
+  .mobile-panel{
+    position:fixed;
+    top:0; right:-100%;
+    width:78%;
+    max-width:360px;
+    height:100vh;
+    background:var(--card);
+    box-shadow:-20px 0 40px rgba(0,0,0,0.12);
+    padding:80px 18px;
+    transition:right .36s cubic-bezier(.2,.9,.3,1);
+    z-index:9998;
+    overflow:auto;
+  }
+  .mobile-panel a{display:block; padding:12px 8px; font-weight:700; color:var(--text); border-radius:8px; margin-bottom:6px}
+  .mobile-panel .close{ position:absolute; top:14px; right:16px; padding:8px; }
+
+  /* HERO */
+  .hero {
+    max-width:var(--max-w); margin:110px auto 28px; padding:28px; display:flex; gap:24px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px; box-shadow:0 18px 40px rgba(0,0,0,0.06);
+    align-items:center;
+  }
+  .hero-left{ flex:1; display:grid; grid-template-columns:repeat(2,1fr); gap:12px }
+  .visual{ background:var(--card); border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; padding:8px; box-shadow:0 10px 30px rgba(0,0,0,0.06) }
+  .visual img{ width:100%; height:160px; object-fit:cover; border-radius:8px; transition:transform .45s }
+  .visual img:hover{ transform:scale(1.04) translateY(-6px) }
+  .hero-right{ flex:1; padding:8px 6px }
+  .tag{ display:inline-block; background:#fff6ee; color:var(--accent); padding:4px;border-radius:8px; font-size: 2rem; font-weight:700; margin-bottom:12px; }
+  .hero-right h2{ font-size:36px; margin:8px 0 12px; line-height:1.05 }
+  .lead{ color:var(--muted); margin-bottom:14px; max-width:520px }
+  .hero-cta{ display:flex; gap:12px; align-items:center; margin-top:10px; flex-wrap:wrap }
+  .cta-primary{ padding:12px 20px; border-radius:12px; background:var(--accent); color:#fff; font-weight:700; box-shadow:0 12px 30px rgba(179,41,41,0.14) }
+  .cta-ghost{ padding:10px 16px; border-radius:10px; border:1px solid rgba(0,0,0,0.06) ; background:transparent }
+
+/* ============================= */
+/* INFO SECTION FULL WIDTH */
+/* ============================= */
+
+.section-info{
+  max-width:100%;
+  margin:50px auto;
+  padding:0;
+}
+
+.section-info .title{
+  font-size:28px;
+  text-align:center;
+  margin-bottom:26px;
+  font-weight:800;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:32px;
+}
+
+.col-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:32px;
+  max-width:1400px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+.info-card{
+  background:#000;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 18px 50px rgba(0,0,0,0.25);
+  cursor:pointer;
+}
+
+.info-card img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  transition:transform .6s ease;
+  display:block;
+}
+
+.info-card:hover img{
+  transform:scale(1.08);
+}
+
+.info-card .meta{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:18px;
+  background:linear-gradient(180deg, transparent, rgba(0,0,0,.75));
+  color:#fff;
+  font-size:20px;
+  font-weight:800;
+  text-align:left;
+}
+
+/* RESPONSIVE */
+@media (max-width:900px){
+  .col-grid{
+    grid-template-columns:1fr;
+    padding:0 16px;
+  }
+
+  .info-card img{
+    height:300px;
+  }
+
+  .section-info .title{
+    font-size:22px;
+  }
+}
+
+
+  /* PROMO SLIDER */
+  .section-promo{ max-width:var(--max-w); margin:32px auto; padding:14px; }
+  .swiper{ border-radius:14px; overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,0.08) }
+  .swiper-slide img{ width:100%; height:260px; object-fit:cover; display:block }
+
+  /* SERVICES */
+  .section-services{ max-width:var(--max-w); margin:36px auto; padding:20px }
+  .section-services .grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:18px }
+  .service{ background:var(--card); padding:18px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06); text-align:center }
+  .service h4{ margin:8px 0; font-size:18px; font-weight:700 }
+  .service p{ color:var(--muted); font-size:14px }
+
+  /* PRICING */
+  .section-pricing{ max-width:1100px; margin:36px auto; padding:20px; text-align:center }
+  .pricing-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px }
+  .plan{ background:var(--card); padding:18px; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,0.06) }
+  .plan .price{ font-size:22px; font-weight:800; color:var(--accent); margin:12px 0 }
+
+  /* TESTIMONIALS */
+  .section-testimonials{ max-width:1100px; margin:36px auto; padding:20px }
+  .test-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px }
+  .test-card{ background:var(--card); padding:18px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06) }
+  .test-card p{ color:var(--muted) }
+  .test-card .who{ margin-top:12px; font-weight:700 }
+
+  /* CTA big */
+  .cta-hero{ max-width:var(--max-w); margin:36px auto; padding:28px; display:flex; gap:18px; align-items:center; justify-content:space-between; background:linear-gradient(180deg, rgba(179,41,41,0.06), rgba(179,41,41,0.03)); border-radius:12px; flex-wrap:wrap }
+  .cta-hero .copy{ max-width:800px }
+  .cta-hero h3{ font-size:22px; margin-bottom:6px }
+  .cta-hero .cta-join{ padding:12px 20px; background:var(--accent); color:#fff; border-radius:10px; font-weight:800; }
+
+  /* PRODUCTS (simple) */
+  .section-products{ max-width:var(--max-w); margin:36px auto; padding:20px; }
+  .products-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px }
+
+  .product-card{ background:var(--card); padding:14px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06) }
+  .product-card img{ width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:12px }
+
+  /* FOOTER */
+  footer{ margin-top:40px; padding:28px; text-align:center; color:var(--muted) }
+
+  /* responsive */
+  @media (max-width:980px){
+    .hero{ flex-direction:column; }
+    .hero-left{ grid-template-columns:repeat(2,1fr) }
+    .visual img{ height:140px }
+  }
+  @media (max-width:720px){
+    .info-grid{ grid-template-columns:1fr }
+    .hamburger{ display:block }
+    .brand h1{ font-size:16px }
+    .mobile-panel{ width:86% }
+  }
+  @media (max-width:420px){
+    .visual img{ height:110px }
+  }
+
+  /* small util */
+  .center{ text-align:center }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav" class="nav" role="navigation" aria-label="Main navigation">
+  <div class="brand">
+    <img src="logo.jpg" alt="AR" />
+    <h1>AR PRINTING</h1>
+  </div>
+
+  <div class="links" role="menubar" aria-label="Primary">
+    <a href="#home" role="menuitem">Beranda</a>
+    <a href="#produk" role="menuitem">Produk</a>
+    <a href="#info" role="menuitem">Info</a>
+    <a href="#kontak" role="menuitem">Kontak</a>
+  </div>
+
+  <div class="actions">
+    <button class="icon-btn" id="darkToggle" aria-label="Toggle dark mode">🌓</button>
+    <button class="btn hide-mobile" onclick="location.href='#produk'">Pesan Sekarang</button>
+    <div class="hamburger" id="hamburger" aria-label="Open menu" role="button" tabindex="0">
+      <svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="2" rx="1" fill="#111"/><rect y="6" width="22" height="2" rx="1" fill="#111"/><rect y="12" width="22" height="2" rx="1" fill="#111"/></svg>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE PANEL -->
+<div id="mobilePanel" class="mobile-panel" aria-hidden="true" style="right:-100%">
+  <button class="close" onclick="closeMobile()" aria-label="Close menu">✕</button>
+  <a href="#home" onclick="closeMobile()">Beranda</a>
+  <a href="#produk" onclick="closeMobile()">Produk</a>
+  <a href="#info" onclick="closeMobile()">Info</a>
+  <a href="#kontak" onclick="closeMobile()">Kontak</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero" aria-label="Hero section">
+  <div class="hero-left" aria-hidden="false">
+    <div class="visual"><img src="gambar/benner.png" alt="Banner 1" loading="lazy"></div>
+    <div class="visual"><img src="gambar/card.jpg" alt="Banner 2" loading="lazy"></div>
+    <div class="visual"><img src="gambar/card 2.png" alt="Banner 3" loading="lazy"></div>
+    <div class="visual"><img src="gambar/card 3.png" alt="Banner 4" loading="lazy"></div>
+  </div>
+
+  <div class="hero-right">
+    <div class="tag">AR PRINTING</div>
+    <h2>Cetak mug, kaos, stiker, dan merchandise lain dengan kualitas terbaik. Pilih desainmu, kami cetak dan kirim door-to-door.</h2>
+    <!-- <p class="lead">Cetak mug, kaos, stiker, dan merchandise lain dengan kualitas terbaik. Pilih desainmu, kami cetak dan kirim door-to-door.</p> -->
+    <div class="hero-cta">
+      <a href="#produk" class="cta-primary">Lihat Produk</a>
+      <a href="#kontak" class="cta-ghost">Ada Pertanyaan?</a>
+    </div>
+  </div>
+</section>
+
+<!-- INFO TERBARU 4 GAMBAR -->
+<!-- INFO TERBARU FULL WIDTH -->
+<section id="info" class="section-info" aria-label="Info terbaru full width">
+
+  <div class="title">Info Terbaru AR PRINTING</div>
+
+  <div class="info-grid">
+
+    <div class="col-grid">
+      <div class="info-card">
+        <img src="gambar/card 4.png" alt="Mug Custom">
+        <div class="meta">Mug Custom</div>
+      </div>
+      
+
+      <div class="info-card">
+        <img src="gambar/card.jpg" alt="Sablon Kaos 30s">
+        <div class="meta">Sablon Kaos 30s</div>
+      </div>
+    </div>
+
+    <div class="col-grid">
+      <div class="info-card">
+        <img src="gambar/card 5.png" alt="Sablon Totebag">
+        <div class="meta">Sablon Totebag</div>
+      </div>
+
+      <div class="info-card">
+        <img src="gambar/card 6.png" alt="Baju Polo + Bordir">
+        <div class="meta">Baju Polo + Bordir</div>
+      </div>
+    </div>
+
+    <div class="col-grid">
+      <div class="info-card">
+        <img src="gambar/card 2.png" alt="Sablon Kaos 24s">
+        <div class="meta">Sablon Kaos 24s</div>
+      </div>
+
+      <div class="info-card">
+        <img src="gambar/card 7.png" alt="Desain Suka-Suka">
+        <div class="meta">Desain Suka-Suka</div>
+      </div>
+    </div>
+
+    <div class="col-grid">
+      <div class="info-card">
+        <img src="gambar/ukuran.jpg" alt="Ukuran Kaos">
+        <div class="meta">Ukuran Kaos</div>
+      </div>
+
+      <div class="info-card">
+        <img src="gambar/card 8.png" alt="Desain Suka-Suka">
+        <div class="meta">Desain Suka-Suka</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PROMO SLIDER -->
+<section class="section-promo" aria-label="Promo slider">
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1600&auto=format&fit=crop" alt="promo1"></div>
+      <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1600&auto=format&fit=crop" alt="promo2"></div>
+      <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1600&auto=format&fit=crop" alt="promo3"></div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section-services" aria-label="Layanan">
+  <h3 class="center">Mitra Pengiriman Kami</h3>
+  <div class="grid" style="max-width:var(--max-w); margin:18px auto;">
+    <div class="service">
+      <img src="gambar/Logo JNE.png" style="width:100%; height:135px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <h4>JNE</h4>
+      <p>Bantu bikin desain yang menarik & sesuai brand.</p>
+    </div>
+    <div class="service">
+      <img src="gambar/logo jnt.png" style="width:100%; height:100px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <h4>J&T</h4>
+      <p>Cetak berkualitas dengan deadline cepat.</p>
+    </div>
+    <div class="service">
+      <img src="gambar/logo SPX.png" style="width:100%; height:135px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <h4>SPX</h4>
+      <p>Pengiriman aman & cepat sampai tujuan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-pricing" aria-label="Paket & Harga">
+  <h3 class="center">List Harga</h3>
+  <div class="pricing-grid" style="max-width:var(--max-w); margin:18px auto;">
+    <div class="plan">
+      <h1>KAOS POLOS</h1>
+      <h4>Cotton Combed 24's Lengan Pendek</h4>
+      <div class="price">Rp 50.000 /PCS</div>
+      <h4>Cotton Combed 24's Lengan Panjang</h4>
+      <div class="price">Rp 60.000 /PCS</div>
+    </div>
+    <div class="plan">
+      <h1>KAOS + SABLON</h1>
+      <h4>Cotton Combed 24's Lengan Pendek</h4>
+        <div class="price">Rp 65.000 /PCS</div>
+        <h4>Cotton Combed 24's Lengan Panjang</h4>
+        <div class="price">Rp 75.000 /PCS</div>
+    </div>
+    <div class="plan">
+      <h1>BAJU + BORDIR</h1>
+      <h4>Baju Polo</h4>
+        <div class="price">Rp 85.000 /PCS</div>
+        <h4>Cotton Combed 30's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+    </div>
+    <div class="plan">
+      <h1>KAOS + BORDIR</h1>
+      <h4>Cotton Combed 24's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+        <h4>Cotton Combed 30's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+    </div>
+    <div class="plan">
+      <h1>KAOS + BORDIR</h1>
+      <h4>Cotton Combed 24's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+        <h4>Cotton Combed 30's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+    </div>
+    <div class="plan">
+      <h1>KAOS + BORDIR</h1>
+      <h4>Cotton Combed 24's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+        <h4>Cotton Combed 30's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+    </div>
+    <div class="plan">
+      <h1>KAOS + BORDIR</h1>
+      <h4>Cotton Combed 24's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+        <h4>Cotton Combed 30's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+    </div>
+    <div class="plan">
+      <h1>KAOS + BORDIR</h1>
+      <h4>Cotton Combed 24's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+        <h4>Cotton Combed 30's</h4>
+        <div class="price">Rp 25.000 /PCS</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testi" class="section-testimonials" aria-label="Testimonial">
+  <h3 class="center">Apa Kata Mereka</h3>
+  <div class="test-grid" style="max-width:var(--max-w); margin:18px auto;">
+    <div class="test-card">
+      <p>"Kualitas mug-nya juara, warna tetap cerah setelah dicuci berkali-kali."</p>
+      <div class="who">— Rina, Event Organizer</div>
+    </div>
+    <div class="test-card">
+      <p>"Proses cepat & customer service ramah. Recommended!"</p>
+      <div class="who">— Budi, UKM</div>
+    </div>
+    <div class="test-card">
+      <p>"Harga bersaing, hasil sangat memuaskan — order lagi deh."</p>
+      <div class="who">— Sari, Kado Pernikahan</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BIG -->
+<section class="cta-hero" aria-label="Call to action">
+  <div class="copy">
+    <h3>Siap Cetak Merchandise Berkualitas?</h3>
+    <p>Pesan sekarang, dapatkan penawaran khusus & gratis desain untuk pemesanan tertentu.</p>
+  </div>
+  <div>
+    <a class="cta-join" href="#kontak">Hubungi Sekarang</a>
+  </div>
+</section>
+
+<!-- PRODUCTS (CTA target) -->
+<section id="produk" class="section-products" aria-label="Produk">
+  <h3 class="center">Produk Unggulan</h3>
+  <div class="products-grid" style="max-width:var(--max-w); margin:18px auto;">
+    <div class="product-card">
+      <img src="produk1.jpg" alt="Mug Fullprint" loading="lazy">
+      <h4 style="margin:8px 0">Mug Fullprint</h4>
+      <p style="color:var(--muted)">Tampilan 360°, warna tajam</p>
+    </div>
+    <div class="product-card">
+      <img src="produk2.jpg" alt="Kaos Sablon" loading="lazy">
+      <h4 style="margin:8px 0">Kaos Sablon</h4>
+      <p style="color:var(--muted)">Bahan nyaman & tahan lama</p>
+    </div>
+    <div class="product-card">
+      <img src="produk3.jpg" alt="Sticker Waterproof" loading="lazy">
+      <h4 style="margin:8px 0">Sticker Waterproof</h4>
+      <p style="color:var(--muted)">Cocok untuk packaging & label</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="kontak">
+  <p>© 2025 AR PRINTING — Semua Hak Dilindungi</p>
+</footer>
+
+<!-- SCRIPTS: Swiper + GSAP + ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  // NAVBAR scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', ()=> {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // MOBILE PANEL toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobilePanel = document.getElementById('mobilePanel');
+  hamburger && hamburger.addEventListener('click', ()=> {
+    const open = mobilePanel.style.right === '0px';
+    mobilePanel.style.right = open ? '-100%' : '0';
+    hamburger.classList.toggle('active');
+  });
+  function closeMobile(){ mobilePanel.style.right='-100%'; hamburger.classList.remove('active'); }
+
+  // DARK MODE toggle (persist)
+  const darkToggle = document.getElementById('darkToggle');
+  const themeKey = 'ar_printing_theme_v1';
+  function applyTheme(t){
+    if(t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+    else document.documentElement.removeAttribute('data-theme');
+  }
+  const saved = localStorage.getItem(themeKey) || 'light';
+  applyTheme(saved);
+  if(darkToggle){
+    darkToggle.addEventListener('click', ()=>{
+      const now = document.documentElement.hasAttribute('data-theme') ? 'light' : 'dark';
+      applyTheme(now);
+      localStorage.setItem(themeKey, now);
+      // change button icon/text quickly
+      darkToggle.textContent = now === 'dark' ? '🌞' : '🌓';
+    });
+    // set initial icon
+    darkToggle.textContent = (saved === 'dark') ? '🌞' : '🌓';
+  }
+
+  // SWIPER (promo slider)
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    autoplay: { delay: 3000, disableOnInteraction: false },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    slidesPerView: 1,
+    spaceBetween: 12,
+  });
+
+  // GSAP animations
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.from(".hero-right h2", { y: 30, opacity: 0, duration: .7, ease: "power3.out" });
+  gsap.from(".hero-right .lead", { y: 20, opacity: 0, duration: .7, delay: .12 });
+  gsap.from(".hero-left .visual", { scale: 0.98, opacity: 0, stagger: .08, duration: .8, ease: "power3.out" });
+
+  // reveal sections
+  const revealEls = document.querySelectorAll('.info-card, .service, .plan, .test-card, .product-card, .service, .plan');
+  revealEls.forEach((el, i) => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: "top 85%" },
+      y: 28, opacity: 0, duration: .72, delay: i*0.03, ease: "power3.out"
+    });
+  });
+
+  // subtle float for hero images
+  gsap.to(".hero-left img", { y: -8, duration: 3.2, repeat: -1, yoyo: true, stagger: 0.3, ease: "sine.inOut" });
+
+  // CTA pop
+  gsap.from(".cta-join, .cta-primary", { scale: .96, opacity:0, duration:.6, delay:.4, ease:"back.out(1.4)" });
+
+  // close mobile on ESC
+  document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeMobile(); });
+
+  // lazy-load fallback
+  document.querySelectorAll('img').forEach(img => { if(!img.hasAttribute('loading')) img.setAttribute('loading','lazy'); });
+</script>
+
+</body>
+</html>
