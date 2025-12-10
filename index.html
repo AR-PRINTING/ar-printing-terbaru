@@ -82,7 +82,7 @@
   }
   .hero-left{ flex:1; display:grid; grid-template-columns:repeat(2,1fr); gap:12px }
   .visual{ background:var(--card); border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; padding:8px; box-shadow:0 10px 30px rgba(0,0,0,0.06) }
-  .visual img{ width:100%; height:160px; object-fit:cover; border-radius:8px; transition:transform .45s }
+  .visual img{ width:300%; height:150px; object-fit:cover; border-radius:8px; transition:transform .45s }
   .visual img:hover{ transform:scale(1.04) translateY(-6px) }
   .hero-right{ flex:1; padding:8px 6px }
   .tag{ display:inline-block; background:#fff6ee; color:var(--accent); padding:4px;border-radius:8px; font-size: 2rem; font-weight:700; margin-bottom:12px; }
@@ -211,7 +211,7 @@
   .products-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px }
 
   .product-card{ background:var(--card); padding:14px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06) }
-  .product-card img{ width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:12px }
+  .product-card img{ width:250px; height:250px; object-fit:cover; border-radius:10px; margin-bottom:12px }
 
   /* FOOTER */
   footer{ margin-top:40px; padding:28px; text-align:center; color:var(--muted) }
@@ -220,7 +220,7 @@
   @media (max-width:980px){
     .hero{ flex-direction:column; }
     .hero-left{ grid-template-columns:repeat(2,1fr) }
-    .visual img{ height:140px }
+    .visual img{ height:300px }
   }
   @media (max-width:720px){
     .info-grid{ grid-template-columns:1fr }
@@ -229,7 +229,7 @@
     .mobile-panel{ width:86% }
   }
   @media (max-width:420px){
-    .visual img{ height:110px }
+    .visual img{ height:200px }
   }
 
   /* small util */
@@ -273,7 +273,7 @@
 <!-- HERO -->
 <section id="home" class="hero" aria-label="Hero section">
   <div class="hero-left" aria-hidden="false">
-    <div class="visual"><img src="gambar/benner.png" alt="Banner 1" loading="lazy"></div>
+    <div class="visual"><img src="gambar/SABLON KAOS.png" alt="Banner 1" loading="lazy"></div>
     <div class="visual"><img src="gambar/card.jpg" alt="Banner 2" loading="lazy"></div>
     <div class="visual"><img src="gambar/card 2.png" alt="Banner 3" loading="lazy"></div>
     <div class="visual"><img src="gambar/card 3.png" alt="Banner 4" loading="lazy"></div>
@@ -281,7 +281,7 @@
 
   <div class="hero-right">
     <div class="tag">AR PRINTING</div>
-    <h2>Cetak mug, kaos, stiker, dan merchandise lain dengan kualitas terbaik. Pilih desainmu, kami cetak dan kirim door-to-door.</h2>
+    <h2>Sabalon Koas, Cetak Mug, dan Merchandise lain dengan kualitas terbaik. Pilih desainmu, kami siap layanin dengan baik.</h2>
     <!-- <p class="lead">Cetak mug, kaos, stiker, dan merchandise lain dengan kualitas terbaik. Pilih desainmu, kami cetak dan kirim door-to-door.</p> -->
     <div class="hero-cta">
       <a href="#produk" class="cta-primary">Lihat Produk</a>
@@ -381,17 +381,42 @@
   <h3 class="center">Mitra Pengiriman Kami</h3>
   <div class="grid" style="max-width:var(--max-w); margin:18px auto;">
     <div class="service">
-      <img src="gambar/Logo JNE.png" style="width:100%; height:135px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <img src="gambar/Logo JNE.png" style="width:80%; height:135px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
       <h4>JNE</h4>
       <p>Bantu bikin desain yang menarik & sesuai brand.</p>
     </div>
     <div class="service">
-      <img src="gambar/logo jnt.png" style="width:100%; height:100px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <img src="gambar/logo ninja.jpg" style="width:90%; height:90px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <h4>NINJA XPRESS</h4>
+      <p>Bantu bikin desain yang menarik & sesuai brand.</p>
+    </div>
+    <div class="service">
+      <img src="gambar/logo tiki.png" style="width:100%; height:80px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <h4>TIKI</h4>
+      <p>Bantu bikin desain yang menarik & sesuai brand.</p>
+    </div>
+    <div class="service">
+      <img src="gambar/logo grab.png" style="width:100%; height:90px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <h4>GRAB EXPERSS</h4>
+      <p>Bantu bikin desain yang menarik & sesuai brand.</p>
+    </div>
+     <div class="service">
+      <img src="gambar/logo antarjasa.png" style="width:100%; height:90px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <h4>ANTAR JASA</h4>
+      <p>Bantu bikin desain yang menarik & sesuai brand.</p>
+    </div>
+     <div class="service">
+      <img src="gambar/logo gosend.png" style="width:100%; height:50px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <h4>GOSEND</h4>
+      <p>Bantu bikin desain yang menarik & sesuai brand.</p>
+    </div>
+    <div class="service">
+      <img src="gambar/logo jnt.png" style="width:100%; height:80px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
       <h4>J&T</h4>
       <p>Cetak berkualitas dengan deadline cepat.</p>
     </div>
     <div class="service">
-      <img src="gambar/logo SPX.png" style="width:100%; height:135px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
+      <img src="gambar/logo SPX.png" style="width:110%; height:108px; object-fit:cover; border-radius:10px; margin-bottom:12px" alt="">
       <h4>SPX</h4>
       <p>Pengiriman aman & cepat sampai tujuan.</p>
     </div>
@@ -470,7 +495,7 @@
         <div class="price">Rp 85.000 /PCS</div>
         </div>
     <div class="plan">
-      <h1>JERSAY CUSTOM</h1>
+      <h1>JERSEY CUSTOM</h1>
       <h4>Jersey Custom</h4>
         <div class="price">Rp 100.000 /PCS</div>
         <h4>Jersey Custom 1 Set</h4>
@@ -480,24 +505,6 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section id="testi" class="section-testimonials" aria-label="Testimonial">
-  <h3 class="center">Apa Kata Mereka</h3>
-  <div class="test-grid" style="max-width:var(--max-w); margin:18px auto;">
-    <div class="test-card">
-      <p>"Kualitas mug-nya juara, warna tetap cerah setelah dicuci berkali-kali."</p>
-      <div class="who">— Rina, Event Organizer</div>
-    </div>
-    <div class="test-card">
-      <p>"Proses cepat & customer service ramah. Recommended!"</p>
-      <div class="who">— Budi, UKM</div>
-    </div>
-    <div class="test-card">
-      <p>"Harga bersaing, hasil sangat memuaskan — order lagi deh."</p>
-      <div class="who">— Sari, Kado Pernikahan</div>
-    </div>
-  </div>
-</section>
 
 <!-- CTA BIG -->
 <section class="cta-hero" aria-label="Call to action">
@@ -515,19 +522,54 @@
   <h3 class="center">Produk Unggulan</h3>
   <div class="products-grid" style="max-width:var(--max-w); margin:18px auto;">
     <div class="product-card">
-      <img src="produk1.jpg" alt="Mug Fullprint" loading="lazy">
-      <h4 style="margin:8px 0">Mug Fullprint</h4>
-      <p style="color:var(--muted)">Tampilan 360°, warna tajam</p>
+      <img src="gambar/card.jpg" alt="Sablon Kaos Fullprint" loading="lazy">
+      <h4 style="margin:0px 20">Sablon Kaos Fullprint</h4>
+      <p style="color:var(--muted)">Sablon warna tajam</p>
     </div>
     <div class="product-card">
-      <img src="produk2.jpg" alt="Kaos Sablon" loading="lazy">
+      <img src="gambar/card 2.png" alt="Kaos Sablon" loading="lazy">
       <h4 style="margin:8px 0">Kaos Sablon</h4>
       <p style="color:var(--muted)">Bahan nyaman & tahan lama</p>
     </div>
     <div class="product-card">
-      <img src="produk3.jpg" alt="Sticker Waterproof" loading="lazy">
-      <h4 style="margin:8px 0">Sticker Waterproof</h4>
-      <p style="color:var(--muted)">Cocok untuk packaging & label</p>
+      <img src="gambar/card 4.png" alt="Sablon Mug" loading="lazy">
+      <h4 style="margin:8px 0">Sablon Mug</h4>
+      <p style="color:var(--muted)">Cocok untuk souvenir</p>
+    </div>
+    <div class="product-card">
+      <img src="gambar/card 6.png" alt="Baju Bordir" loading="lazy">
+      <h4 style="margin:8px 0">Baju + Bordir</h4>
+      <p style="color:var(--muted)">Cocok untuk baju perusahaan</p>
+    </div>
+    <div class="product-card">
+      <img src="gambar/card 5.png" alt="Sablon Totebag" loading="lazy">
+      <h4 style="margin:8px 0">Sablon Totebag</h4>
+      <p style="color:var(--muted)">Cocok untuk couple</p>
+    </div>
+    <div class="product-card">
+      <img src="gambar/card 11.png" alt="Sablon Rompi" loading="lazy">
+      <h4 style="margin:8px 0">Sablon Rompi</h4>
+      <p style="color:var(--muted)">Cocok untuk seragam</p>
+    </div>
+    <div class="product-card">
+      <img src="gambar/card 8.png" alt="Sablon Koas" loading="lazy">
+      <h4 style="margin:8px 0">Sablon Koas </h4>
+      <p style="color:var(--muted)">Desain Suka - Suka</p>
+    </div>
+    <div class="product-card">
+      <img src="gambar/card 9.png" alt="Gantungan Kunci" loading="lazy">
+      <h4 style="margin:8px 0">Custom Gantungan Kunci</h4>
+      <p style="color:var(--muted)">Cocok untuk souvenir</p>
+    </div>
+    <div class="product-card">
+      <img src="gambar/card 10.png" alt="Sablon Topi" loading="lazy">
+      <h4 style="margin:8px 0">Sablon Topi</h4>
+      <p style="color:var(--muted)">Cocok untuk souvenir</p>
+    </div>
+    <div class="product-card">
+      <img src="gambar/card 12.png" alt="Jersey Custom" loading="lazy">
+      <h4 style="margin:8px 0">Jersey Custom</h4>
+      <p style="color:var(--muted)">Cocok untuk seragam</p>
     </div>
   </div>
 </section>
